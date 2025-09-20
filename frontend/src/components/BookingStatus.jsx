@@ -81,7 +81,10 @@ function BookingStatus() {
     }
   return (
     <>
-    <h1 className='text-center text-4xl font-extrabold mt-8 text-purple-700 underline decoration-indigo-500'>Book Booking Status</h1>
+    <div className='flex justify-center mt-5 '>
+      <h1 onClick={()=>navigate("/adminProfile")} className='cursor-pointer font-bold text-white bg-purple-500 text-xl w-35 px-3 py-2 rounded-xl text-center'>Go home</h1>
+    </div>
+    <h1 className='text-center text-4xl font-extrabold mt-8 text-purple-700 '>Book Booking Status</h1>
       <div className='flex flex-col gap-8 pt-10 px-5 md:px-10 pb-10'>
          
           {
