@@ -1,6 +1,7 @@
 import React, { useEffect,useState } from 'react'
 import axios from 'axios'
 import { use } from 'react'
+import { Navigate } from 'react-router-dom'
 
 
 function AdminVerifyStudent() {
@@ -99,6 +100,10 @@ function AdminVerifyStudent() {
         console.log("error in fetching post req in activeOrdeactive",err)
       })
    }
+
+
+
+
    
 
   return (
@@ -155,6 +160,8 @@ function AdminVerifyStudent() {
                     </tr>
                     </tbody>
                 </table>
+
+                
     //            <div key={item.studentId} className=' w-[350px] h-[400px] rounded-xl bg-white   ' >
     //        <h1 className='pt-7 text-3xl font-bold underline offset-4'>Students Detail's</h1>
     //       <h1 className='pt-6 text-xl '>Student name:-{item.student_name}</h1>
@@ -187,6 +194,9 @@ function AdminVerifyStudent() {
             ))
           }
        </div>
+
+
+      
    
       
     </>

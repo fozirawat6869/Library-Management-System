@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useEffect } from 'react'
 import axios from 'axios'
+import '../css/login.css'
 
 function Loginpage() {
 
@@ -54,12 +55,18 @@ const handleOnclick=(e)=>{
 
  const [showpassword,setShowpassword]=useState(false)
 
+
+   
+
   return (
     <>
+    {/* <div className='relative '>
+      <span className='animated-border'></span> */}
+  
     <div style={{ backgroundImage: `url(${libraryImage})` }} className='flex justify-center items-center w-full h-[100vh] bg-cover bg-center '>
-      <div className=' h-[750px] w-[550px]  rounded-md flex flex-col overflow-hidden bg-white gap-4 '>
-       
-        <div style={{ backgroundImage: `url(${planeimg})` }} className='w-[100%] h-[40%] '>
+      <div className=' h-[750px] w-[550px]  rounded-md flex flex-col overflow-hidden  gap-4 rounded-xl  '>
+       <div className='bg-white w-full h-full rounded-xl overflow-hidden '>
+        <div style={{ backgroundImage: `url(${planeimg})` }} className='w-[100%] h-[40%]  overflow-hidden '>
           <h1 className='text-center font-bold text-[40px] mt-6  '>Welcome to the website</h1>
           
           <h1 className='text-center font-bold text-4xl mt-6  '>Login Page</h1>
@@ -106,6 +113,7 @@ const handleOnclick=(e)=>{
            ) :  
            
            <>
+
             <form onSubmit={handleOnclick} className='flex flex-col items-center m-0 p-0' >
                <h1 className='text-3xl font-bold  text-center'>Student Login</h1>
                <div className='relative w-[350px]   '>
@@ -134,9 +142,10 @@ const handleOnclick=(e)=>{
            }
               
         </div>
-      
+      </div>
       </div>
     </div>
+      {/* </div> */}
     </>
   )
 }

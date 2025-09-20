@@ -14,6 +14,7 @@ import StudentProfile from './components/StudentProfile'
 import EditStudentProfile from './components/EditStudentProfile.jsx'
 import BookingDetails from './components/BookingDetails.jsx'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+// import StudentOutletWrapper from './components/StudentOutletWrapper.jsx'
 
 // import { useContext } from 'react'
 // import { createContext } from 'react'
@@ -36,7 +37,7 @@ function App() {
       <Routes>
         <Route index element={<Loginpage/>} />
         <Route path='/signup' element={<Signup/>} />
-        <Route path='/branch' element={<BranchPage/>} />
+        {/* <Route path='/branch' element={<BranchPage/>} /> */}
         <Route path={'/books/:branchId/:branch_name'} element={<BranchBooks/>} />
          <Route path='/adminProfile' element={<AdminProfile/>} />
          <Route  path='/verifyStudent' element={<AdminVerifyStudent/>} />
@@ -45,6 +46,8 @@ function App() {
          <Route  path='/studentProfile' element={<StudentProfile/>} />
          <Route path='/editStudentProfile' element={<EditStudentProfile/>} />
          <Route  path='/bookingDetails' element={<BookingDetails/>} />
+
+        
       </Routes>
     </BrowserRouter>
      </QueryClientProvider>

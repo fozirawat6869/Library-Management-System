@@ -11,11 +11,7 @@ function BranchPage() {
   const navigate=useNavigate()
   
   const [branchIcon,setBranchIcon]=useState([])
-  //  const {setBranchId}=useContext(context)
-
-  // const jwtToken='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJudW1iZXIiOiIzMzMzMzMzMzMzIiwiaWF0IjoxNzU2MTg4MTM2fQ.z-fT_O0YJAjWwQlCG6YkM8bmlmu0EKn9pzixXGhvDDg'
-// const jwtToken = localStorage.getItem('token');
-//   const data="Mayur Rawat"
+ 
   useEffect(()=>{
     const token=localStorage.getItem("token")
      axios.get("http://localhost:5000/branchIcons",
