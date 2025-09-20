@@ -172,16 +172,20 @@ const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{6,}$/;
     <div style={{ backgroundImage: `url(${libraryImage})` }} className='flex justify-center items-center w-full h-[100vh] bg-cover bg-center '>
       <div className=' h-[800px] w-[550px]  rounded-md flex flex-col overflow-hidden bg-white gap-4 '>
        
-        <div style={{ backgroundImage: `url(${planeimg})` }} className='w-[100%] h-[21%] '>
+        <div
+        //  style={{ backgroundImage: `url(${planeimg})` }}
 
-          <h1 className='text-center font-bold text-4xl mt-4  '>Signup Page</h1>
-          <div className='flex justify-evenly gap-4 mt-5 items-center'>
-            <Button value="Login as a Student" className='text-xl rounded-md border border-black rounded-md p-2 font-bold inline-block bg-orange-400 cursor-pointer' 
+          className='w-[100%] h-[21%] bg-gradient-to-tr from-yellow-300  via-orange-400 to-yellow-500'>
+
+          <h1 className='text-center font-bold text-4xl mt-4 text-white '>Signup Page</h1>
+          <div className='flex justify-evenly gap-4 mt-7 items-center'>
+            <Button value="Login as a Student" 
+            className=' text-xl rounded-md border border-white bg-orange-400 text-white hover:scale-105 transition-all duration-300 rounded-md p-2 font-bold inline-block bg-orange-400 cursor-pointer' 
             onClick={()=>{
               setAdmin("student")
               setFormdata({...formdata,name:"", email:'', number:'', branchname:'', rollno:"", state:'', city:'',password:"",branchId:"",})
               }} />
-            <Button value="Login as a Admin" className='text-xl rounded-md border border-black rounded-md p-2 font-bold inline-block bg-orange-400 cursor-pointer '
+            <Button value="Login as a Admin" className='text-xl rounded-md border border-white bg-orange-400 text-white hover:scale-105 transition-all duration-300 rounded-md p-2 font-bold inline-block bg-orange-400 cursor-pointer '
              onClick={()=>{
               setAdmin("admin")
               setFormdata({...formdata,adminName:'',  adminExperience:"",   adminEmail:"",adminNumber:"", adminPassword:""})
@@ -211,7 +215,7 @@ const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{6,}$/;
                   <option value="5+">5+ years</option>
                </select>  
                <Input value={formdata.adminPassword} onChange={handleChange} name="adminPassword" type="password" placeholder={"Enter your password"} className={`block w-[350px] bg-gray-300 px-5 py-3 mt-5 rounded-3xl ${outline} `} />
-               <Button   type="submit" value="Login" className='bg-blue-500 px-3 py-2 mt-5 rounded-2xl text-white w-[100px] cursor-pointer'  />
+               <Button   type="submit" value="Login" className=' hover:scale-105 transition-all duration-300 bg-blue-500 px-3 py-2 mt-5 rounded-2xl text-white w-[100px] cursor-pointer'  />
 
                
             </form>
@@ -270,7 +274,7 @@ const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{6,}$/;
                {/* <Input name="email" type="text" placeholder="Enter your state" className="block w-[350px] bg-gray-300 px-4 py-2 mt-3 rounded-3xl outline-sky-500 " /> */}
                <Input  value={formdata.city} onChange={handleChange}  name="city" type="text" placeholder="Enter your city" className="block w-[350px] bg-gray-300 px-4 py-2 mt-3 rounded-3xl outline-sky-500 " />
                <Input value={formdata.password} onChange={handleChange} name="password" type="password" placeholder={"Enter your password"} className={`block w-[350px] bg-gray-300 px-4 py-2 mt-3 rounded-3xl ${outline}`} />
-               <Button  type="submit" value="Signup"  className='bg-blue-500 px-3 py-2 mt-6 rounded-2xl text-white w-[100px] cursor-pointer'/>
+               <Button  type="submit" value="Signup"  className=' hover:scale-105 transition-all duration-300 bg-blue-500 px-3 py-2 mt-6 rounded-2xl text-white w-[100px] cursor-pointer'/>
               <Link to={"/"} className='text-blue-500 mt-3 text-xl hover:underline-blue-500 cursor-pointer hover:underline underline-offset-2'>Already have an account? </Link>
                              
             </form> 
