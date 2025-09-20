@@ -2,8 +2,10 @@ import React from 'react'
 import { useState ,useEffect} from 'react'
 import axios from 'axios'
 import { use } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function BookingStatus() {
+  const navigate=useNavigate()
     const token=localStorage.getItem('token')
     const [bookingStudent,setBookingStudent]=useState([])
     const [bg,setBg]=useState({})
