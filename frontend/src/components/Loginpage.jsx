@@ -31,7 +31,10 @@ const handleOnclick=(e)=>{
     axios.post('http://localhost:5000/login',formdata, { withCredentials: true })
      .then((res)=>{
     
-      
+      if(res.data.message==="worng email"){
+        alert("wrong email")
+        return
+      }
       if(res.data.success){
         const {token,usertype}=res.data
         console.log(res.data)
@@ -44,13 +47,16 @@ const handleOnclick=(e)=>{
         }
       
       }
+      if(res.data.message==="wrongPassword"){
+        alert("password wrong")
+      }
 
   
      })
        
      .catch((err) => {
         console.log("Axios error:", err);
-        alert("Failed to login. Please try again.");
+        alert("Error in login ");
       });
 }
   

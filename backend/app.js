@@ -85,7 +85,7 @@ app.post('/login',(req,res)=>{
         if(result.length===0){
             console.log("user not found")
             // res.redirect('http://localhost:5173/signup')
-             res.send("user not found")
+            return res.send({message:"worng email"})
            }else{
        
         const planepass = number ? studentpassword : adminpassword;
@@ -102,18 +102,11 @@ app.post('/login',(req,res)=>{
             }
             if(!pass){
               console.log('password is wrong')
-             return
+             return res.send({message:"wrongPassword"})
             }
-            // else{
-            //   console.log(pass)
-            //    const token= jwt.sign({number:req.body.number},'secretKey')
-            //       console.log("token on console :- ",token)
-            //   res.cookie('token',token )  
-              
-            //    return res.json({ success: true, message: "Signup successful",token,usertype});
-            // }
+          
             if(usertype==="student"){
-                 console.log(pass)
+                 console.log(pass);
                const token= jwt.sign({number:req.body.number},'secretKey')
                   console.log("token on console :- ",token)
               // res.cookie('student token :- ',token )  
@@ -121,7 +114,10 @@ app.post('/login',(req,res)=>{
                return res.json({ success: true, message: "login student successful",token,usertype});
             
             }
-            if(usertype==="admin"){
+            // else{
+            //   return res.json(getStandardResponse(false,"login failed of student"))
+            // } 
+             if(usertype==="admin"){
               const token=jwt.sign({email:req.body.email},'secretAdmin')
               console.log("admin token :- ", token)
               // res.cookie("token",token)
@@ -129,6 +125,10 @@ app.post('/login',(req,res)=>{
                return res.json({ success: true, message: "login admin successful",token,usertype});
 
             }
+            // else{
+            //   return res.json(getStandardResponse(false,"login failed of admin"))
+              
+            // }
 
           }) }
 
