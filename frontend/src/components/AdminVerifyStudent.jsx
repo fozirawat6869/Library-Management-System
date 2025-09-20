@@ -1,3 +1,154 @@
+
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Navigate, useNavigate } from 'react-router-dom';
+
+function AdminVerifyStudent() {
+
+  const navigate=useNavigate()
+  const token = localStorage.getItem("token");
+  const [studentData, setStudentData] = useState([]);
+  const [bg, setBg] = useState({});
+
+  const fetchFunction = () => {
+    axios.get("http://localhost:5000/studentDetails", {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then((res) => setStudentData(res.data.data))
+      .catch((err) => console.log("error in fetching student details ", err));
+  }
+
+  useEffect(() => {
+    fetchFunction();
+  }, []);
+
+  function handleOnclick(status, studentId) {
+    setBg((prev) => {
+      const newBg = { ...prev };
+      if (newBg[studentId] === status) delete newBg[studentId];
+      else newBg[studentId] = status;
+      return newBg;
+    });
+  }
+
+  function onClickhandler(studentId) {
+    const status = bg[studentId];
+    if (!status) {
+      alert("please select any button to submit");
+      return;
+    }
+
+    axios.post("http://localhost:5000/activeOrdeactive", { studentId, status }, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then((res) => {
+        const student = studentData.find((item) => item.studentId === studentId);
+        if (student.isActive === 1 && status === "active") {
+          alert("student is already active");
+          return;
+        }
+        if (student.isActive === 0 && status === "deactive") {
+          alert("student is already deactive");
+          return;
+        }
+        if (res.data.message === "activated") {
+          alert(`Student of id=${studentId} is active`);
+          fetchFunction();
+        }
+        if (res.data.message === "deactivated") {
+          alert(`Student of id=${studentId} is deactive`);
+          fetchFunction();
+        }
+      })
+      .catch((err) => console.log("error in fetching post req in activeOrdeactive", err));
+  }
+
+  return (
+    <>
+    <div className='flex justify-center mt-5 '>
+      <h1 onClick={()=>navigate("/adminProfile")} className='cursor-pointer font-bold text-white bg-purple-500 text-xl w-35 px-3 py-2 rounded-xl text-center'>Go home</h1>
+    </div>
+      
+      <h1 className='text-center text-blue-600 text-5xl font-extrabold mt-8 text-gradient-to-r from-purple-600 via-indigo-500 to-blue-500'>
+        Verify Student
+      </h1>
+
+      <div className='flex flex-wrap justify-center gap-8 pt-10 px-4 md:px-10 pb-10'>
+        {
+          studentData.map((item) => (
+            <table
+              key={item.studentId}
+              className='w-full max-w-7xl border border-gray-300 rounded-xl shadow-xl overflow-hidden text-left table-fixed bg-gradient-to-r from-gray-100 to-gray-50'
+            >
+              <thead className='bg-gradient-to-r from-purple-600 via-indigo-500 to-blue-500 text-white'>
+                <tr>
+                  <th className='p-4'>Student ID</th>
+                  <th className='p-4'>Student Name</th>
+                  <th className='p-4'>Branch Name</th>
+                  <th className='p-4'>State</th>
+                  <th className='p-4'>City</th>
+                  <th className='p-4'>Phone</th>
+                  <th className='p-4'>Active</th>
+                  <th className='p-4'>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className='hover:bg-gradient-to-r hover:from-purple-50 hover:to-indigo-50 transition duration-300'>
+                  <td className='p-3 border-b'>{item.studentId}</td>
+                  <td className='p-3 border-b'>{item.student_name}</td>
+                  <td className='p-3 border-b'>{item.student_branch}</td>
+                  <td className='p-3 border-b'>{item.student_state}</td>
+                  <td className='p-3 border-b'>{item.student_city}</td>
+                  <td className='p-3 border-b'>{item.student_phone}</td>
+                  <td className='p-3 border-b'>{item.isActive}</td>
+                  <td className='p-3 border-b  '>
+                    <div className='flex gap-3 justify-center mb-2 '>
+                      <button
+                        onClick={() => handleOnclick("active", item.studentId)}
+                        className={`px-2 py-1 rounded-lg font-semibold transition duration-300 border-1 border-green-500 ${
+                          bg[item.studentId] === "active" ? "bg-green-500 text-white shadow-lg" : "text-green-600 hover:bg-green-500 hover:text-white"
+                        }`}
+                      >
+                        Active
+                      </button>
+                      <button
+                        onClick={() => handleOnclick("deactive", item.studentId)}
+                        className={` px-2 py-1 rounded-lg font-semibold transition duration-300 border-1 border-red-500 ${
+                          bg[item.studentId] === "deactive" ? "bg-red-500 text-white shadow-lg" : "text-red-600 hover:bg-red-500 hover:text-white"
+                        }`}
+                      >
+                        Deactive
+                      </button>
+                    </div>
+                    <div className='flex justify-center'>
+                      <button
+                        onClick={() => onClickhandler(item.studentId)}
+                        className='px-2 py-1 bg-indigo-500 hover:bg-indigo-600 text-white font-bold rounded-lg shadow-lg transition duration-300'
+                      >
+                        Submit
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          ))
+        }
+      </div>
+    </>
+  )
+}
+
+export default AdminVerifyStudent;
+
+
+
+
+
+// code with out css
+
+
+
 // import React, { useEffect,useState } from 'react'
 // import axios from 'axios'
 // import { use } from 'react'
@@ -204,144 +355,3 @@
 // }
 
 // export default AdminVerifyStudent
-
-
-
-
-
-
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Navigate } from 'react-router-dom';
-
-function AdminVerifyStudent() {
-  const token = localStorage.getItem("token");
-  const [studentData, setStudentData] = useState([]);
-  const [bg, setBg] = useState({});
-
-  const fetchFunction = () => {
-    axios.get("http://localhost:5000/studentDetails", {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then((res) => setStudentData(res.data.data))
-      .catch((err) => console.log("error in fetching student details ", err));
-  }
-
-  useEffect(() => {
-    fetchFunction();
-  }, []);
-
-  function handleOnclick(status, studentId) {
-    setBg((prev) => {
-      const newBg = { ...prev };
-      if (newBg[studentId] === status) delete newBg[studentId];
-      else newBg[studentId] = status;
-      return newBg;
-    });
-  }
-
-  function onClickhandler(studentId) {
-    const status = bg[studentId];
-    if (!status) {
-      alert("please select any button to submit");
-      return;
-    }
-
-    axios.post("http://localhost:5000/activeOrdeactive", { studentId, status }, {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then((res) => {
-        const student = studentData.find((item) => item.studentId === studentId);
-        if (student.isActive === 1 && status === "active") {
-          alert("student is already active");
-          return;
-        }
-        if (student.isActive === 0 && status === "deactive") {
-          alert("student is already deactive");
-          return;
-        }
-        if (res.data.message === "activated") {
-          alert(`Student of id=${studentId} is active`);
-          fetchFunction();
-        }
-        if (res.data.message === "deactivated") {
-          alert(`Student of id=${studentId} is deactive`);
-          fetchFunction();
-        }
-      })
-      .catch((err) => console.log("error in fetching post req in activeOrdeactive", err));
-  }
-
-  return (
-    <>
-      <h1 className='text-center text-5xl font-extrabold mt-8 text-gradient-to-r from-purple-600 via-indigo-500 to-blue-500'>
-        Verify Student
-      </h1>
-
-      <div className='flex flex-wrap justify-center gap-8 pt-10 px-4 md:px-10 pb-10'>
-        {
-          studentData.map((item) => (
-            <table
-              key={item.studentId}
-              className='w-full max-w-7xl border border-gray-300 rounded-xl shadow-xl overflow-hidden text-left table-fixed bg-gradient-to-r from-gray-100 to-gray-50'
-            >
-              <thead className='bg-gradient-to-r from-purple-600 via-indigo-500 to-blue-500 text-white'>
-                <tr>
-                  <th className='p-4'>Student ID</th>
-                  <th className='p-4'>Student Name</th>
-                  <th className='p-4'>Branch Name</th>
-                  <th className='p-4'>State</th>
-                  <th className='p-4'>City</th>
-                  <th className='p-4'>Phone</th>
-                  <th className='p-4'>Active</th>
-                  <th className='p-4'>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className='hover:bg-gradient-to-r hover:from-purple-50 hover:to-indigo-50 transition duration-300'>
-                  <td className='p-3 border-b'>{item.studentId}</td>
-                  <td className='p-3 border-b'>{item.student_name}</td>
-                  <td className='p-3 border-b'>{item.student_branch}</td>
-                  <td className='p-3 border-b'>{item.student_state}</td>
-                  <td className='p-3 border-b'>{item.student_city}</td>
-                  <td className='p-3 border-b'>{item.student_phone}</td>
-                  <td className='p-3 border-b'>{item.isActive}</td>
-                  <td className='p-3 border-b  '>
-                    <div className='flex gap-3 justify-center mb-2 '>
-                      <button
-                        onClick={() => handleOnclick("active", item.studentId)}
-                        className={`px-2 py-1 rounded-lg font-semibold transition duration-300 border-1 border-green-500 ${
-                          bg[item.studentId] === "active" ? "bg-green-500 text-white shadow-lg" : "text-green-600 hover:bg-green-500 hover:text-white"
-                        }`}
-                      >
-                        Active
-                      </button>
-                      <button
-                        onClick={() => handleOnclick("deactive", item.studentId)}
-                        className={` px-2 py-1 rounded-lg font-semibold transition duration-300 border-1 border-red-500 ${
-                          bg[item.studentId] === "deactive" ? "bg-red-500 text-white shadow-lg" : "text-red-600 hover:bg-red-500 hover:text-white"
-                        }`}
-                      >
-                        Deactive
-                      </button>
-                    </div>
-                    <div className='flex justify-center'>
-                      <button
-                        onClick={() => onClickhandler(item.studentId)}
-                        className='px-2 py-1 bg-indigo-500 hover:bg-indigo-600 text-white font-bold rounded-lg shadow-lg transition duration-300'
-                      >
-                        Submit
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          ))
-        }
-      </div>
-    </>
-  )
-}
-
-export default AdminVerifyStudent;

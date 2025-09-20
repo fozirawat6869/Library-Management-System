@@ -90,7 +90,7 @@ function StudentHomePage() {
             <div className='text-white font-bold text-l'>asdf</div>
             <div className='text-white font-bold text-l'>ggd</div>
             <div  onClick={()=>{ 
-                if(studentData._isActive){
+                if(studentData[0].isActive){
                   navigate('/bookingDetails')
                    }else{
                     alert("your account is not active")
@@ -98,13 +98,16 @@ function StudentHomePage() {
                   }} className='cursor-pointer text-white font-bold text-l'>Booking details</div>
             <div className='text-white font-bold text-l flex cursor-pointer ' 
             onClick={()=>{ 
-                if(studentData._isActive){
+                if(studentData[0].isActive){
                   navigate('/studentProfile')
                    }else{
                     alert("your account is not active")
                    }
-                  }} >
-              <div className='flex items-center gap-3'>
+                  }}
+             >
+              <div className='flex items-center gap-3' 
+             
+              >
                 <span className='flex justify-center border-1 border-white rounded-full p-1'>
                   <i className="fas fa-user  " ></i>
                 </span>
