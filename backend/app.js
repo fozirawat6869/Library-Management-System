@@ -405,11 +405,7 @@ app.get('/bookingDetails',protectedRoute,(req,res)=>{
       }else{
          res.json(getStandardResponse(400,"invalid type",[]))
       }
-       
-
-
-   
-
+      
     }
   })
 })

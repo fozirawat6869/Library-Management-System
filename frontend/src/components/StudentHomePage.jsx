@@ -1,10 +1,4 @@
 
-
-
-
-
-
-
 import React from 'react'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
@@ -92,7 +86,7 @@ function StudentHomePage() {
                 className="w-[180px] h-[220px] flex flex-col justify-center items-center rounded-3xl shadow-2xl
                            bg-gradient-to-br from-indigo-500 via-indigo-600 to-blue-500
                            hover:from-blue-500 hover:via-indigo-500 hover:to-indigo-600
-                           transform hover:scale-105 transition-all duration-300"
+                           transform hover:scale-105 transition-all duration-300 cursor-pointer border-white border-1"
               >
                 <div className="text-[80px]">{he.decode(branch.branch_icon)}</div>
                 <p className="text-center font-bold text-lg mt-3 text-white drop-shadow-md">{branch.branch_name}</p>
