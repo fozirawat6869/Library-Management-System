@@ -1,80 +1,185 @@
 
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { FaUserCircle } from "react-icons/fa";
+// import axios from "axios";
+// import React, { useEffect, useState } from "react";
+// import { useNavigate } from "react-router-dom";
+// import { FaUserCircle } from "react-icons/fa";
+
+// function StudentProfile() {
+//   const navigate = useNavigate();
+//   const [studentData, setStudentData] = useState([]);
+//   const token = localStorage.getItem("token");
+
+//   useEffect(() => {
+//     axios
+//       .get("http://localhost:5000/loginStudentDetail", {
+//         headers: { Authorization: `Bearer ${token}` },
+//       })
+//       .then((res) => setStudentData(res.data.data))
+//       .catch((err) => console.error(err));
+//   }, [token]);
+
+//   return (
+//     <div className="min-h-screen bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 flex flex-col items-center py-12 animate-gradient-x">
+//       {studentData.map((item) => (
+//         <div
+//           key={item.studentId}
+//           className="bg-white/80 backdrop-blur-md shadow-2xl rounded-3xl w-full max-w-4xl p-8 md:p-12 border border-white/30"
+//         >
+//           {/* Header with avatar */}
+//           <div className="flex justify-between items-center mb-8">
+//             <div className="flex items-center gap-4">
+//               <FaUserCircle className="text-7xl text-purple-600" />
+//               <h1 className="text-3xl font-bold text-purple-700">{item.student_name}</h1>
+//             </div>
+//             <button
+//               onClick={() => navigate("/studentHomePage")}
+//               className="px-5 py-2 bg-purple-500 hover:bg-purple-600 text-white font-semibold rounded-xl shadow-lg transition duration-300"
+//             >
+//               Home
+//             </button>
+//           </div>
+
+//           {/* Student Details Table */}
+//           <div className="overflow-x-auto">
+//             <table className="w-full text-left border-collapse">
+//               <tbody>
+//                 {Object.entries({
+//                   "Email": item.student_email,
+//                   "Branch": item.student_branch,
+//                   "Roll Number": item.student_rollno,
+//                   "Phone": item.student_phone,
+//                   "City": item.student_city,
+//                   "State": item.student_state,
+//                   "Active": item.isActive ? "Yes" : "No",
+//                 }).map(([key, value]) => (
+//                   <tr
+//                     key={key}
+//                     className="border-b border-gray-300 hover:bg-purple-50 transition duration-200 cursor-pointer"
+//                   >
+//                     <th className="py-3 px-4 font-medium text-gray-700 w-1/3">{key}</th>
+//                     <td className="py-3 px-4 text-gray-800">{value}</td>
+//                   </tr>
+//                 ))}
+//               </tbody>
+//             </table>
+//           </div>
+
+//           {/* Footer */}
+//           <p className="mt-8 text-center text-gray-600">
+//             Your profile details are securely stored.
+//           </p>
+//         </div>
+//       ))}
+//     </div>
+//   );
+// }
+
+// export default StudentProfile;
+
+
+
+
+import axios from 'axios'
+import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { FaUserCircle } from 'react-icons/fa'
 
 function StudentProfile() {
-  const navigate = useNavigate();
-  const [studentData, setStudentData] = useState([]);
-  const token = localStorage.getItem("token");
+  const navigate = useNavigate()
+  const [studentData, setStudentData] = useState([])
+  const token = localStorage.getItem("token")
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/loginStudentDetail", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => setStudentData(res.data.data))
-      .catch((err) => console.error(err));
-  }, [token]);
+    axios.get('http://localhost:5000/loginStudentDetail', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    .then((res) => setStudentData(res.data.data))
+    .catch((err) => console.log("error fetching student data", err))
+  }, [token])
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 flex flex-col items-center py-12 animate-gradient-x">
+    <div className="min-h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-blue-500 flex flex-col  items-center py-10 px-4 ">
       {studentData.map((item) => (
-        <div
-          key={item.studentId}
-          className="bg-white/80 backdrop-blur-md shadow-2xl rounded-3xl w-full max-w-4xl p-8 md:p-12 border border-white/30"
+        <div 
+          key={item.studentId} 
+          className="bg-white shadow-lg rounded-2xl w-full max-w-3xl p-6 mt-20"
         >
-          {/* Header with avatar */}
-          <div className="flex justify-between items-center mb-8">
-            <div className="flex items-center gap-4">
-              <FaUserCircle className="text-7xl text-purple-600" />
-              <h1 className="text-3xl font-bold text-purple-700">{item.student_name}</h1>
+          {/* Header with icon + button */}
+          <div className="flex justify-between items-center mb-6">
+            <div className="flex items-center gap-3">
+              <FaUserCircle className="text-6xl text-indigo-600" />
+              <h1 className="text-3xl font-bold text-gray-800">{item.student_name}</h1>
             </div>
-            <button
-              onClick={() => navigate("/studentHomePage")}
-              className="px-5 py-2 bg-purple-500 hover:bg-purple-600 text-white font-semibold rounded-xl shadow-lg transition duration-300"
+            <button 
+              onClick={() => navigate('/studentHomePage')} 
+              className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition"
             >
               Home
             </button>
           </div>
 
           {/* Student Details Table */}
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse">
+          <div className="overflow-hidden rounded-lg shadow-md">
+            <table className="w-full border-collapse">
+              <thead>
+                <tr className="bg-indigo-100 text-indigo-700 text-left">
+                  <th className="p-3 font-semibold">Field</th>
+                  <th className="p-3 font-semibold">Details</th>
+                </tr>
+              </thead>
               <tbody>
-                {Object.entries({
-                  "Email": item.student_email,
-                  "Branch": item.student_branch,
-                  "Roll Number": item.student_rollno,
-                  "Phone": item.student_phone,
-                  "City": item.student_city,
-                  "State": item.student_state,
-                  "Active": item.isActive ? "Yes" : "No",
-                }).map(([key, value]) => (
-                  <tr
-                    key={key}
-                    className="border-b border-gray-300 hover:bg-purple-50 transition duration-200 cursor-pointer"
-                  >
-                    <th className="py-3 px-4 font-medium text-gray-700 w-1/3">{key}</th>
-                    <td className="py-3 px-4 text-gray-800">{value}</td>
-                  </tr>
-                ))}
+                <tr className="even:bg-gray-50 hover:bg-gray-100 transition">
+                  <td className="p-3 font-medium">Email</td>
+                  <td className="p-3">{item.student_email}</td>
+                </tr>
+                <tr className="even:bg-gray-50 hover:bg-gray-100 transition">
+                  <td className="p-3 font-medium">Branch</td>
+                  <td className="p-3">{item.student_branch}</td>
+                </tr>
+                <tr className="even:bg-gray-50 hover:bg-gray-100 transition">
+                  <td className="p-3 font-medium">Roll No</td>
+                  <td className="p-3">{item.student_rollno}</td>
+                </tr>
+                <tr className="even:bg-gray-50 hover:bg-gray-100 transition">
+                  <td className="p-3 font-medium">Phone</td>
+                  <td className="p-3">{item.student_phone}</td>
+                </tr>
+                <tr className="even:bg-gray-50 hover:bg-gray-100 transition">
+                  <td className="p-3 font-medium">City</td>
+                  <td className="p-3">{item.student_city}</td>
+                </tr>
+                <tr className="even:bg-gray-50 hover:bg-gray-100 transition">
+                  <td className="p-3 font-medium">State</td>
+                  <td className="p-3">{item.student_state}</td>
+                </tr>
+                <tr className="even:bg-gray-50 hover:bg-gray-100 transition">
+                  <td className="p-3 font-medium">Status</td>
+                  <td className="p-3">
+                    <span className={`px-3 py-1 rounded-full text-white text-sm font-semibold ${item.isActive ? 'bg-green-500' : 'bg-red-500'}`}>
+                      {item.isActive ? 'Active' : 'Inactive'}
+                    </span>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
 
-          {/* Footer */}
-          <p className="mt-8 text-center text-gray-600">
-            Your profile details are securely stored.
+          {/* Footer text */}
+          <p className="text-gray-500 text-sm text-center mt-6">
+            Profile details are shown above.
           </p>
         </div>
       ))}
     </div>
-  );
+  )
 }
 
-export default StudentProfile;
+export default StudentProfile
+
+
+
+
+
 
 
 // without css code 

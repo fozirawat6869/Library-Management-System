@@ -1,19 +1,8 @@
 
-
-
-import React from 'react'
-import { useState } from 'react'
-import axios from 'axios';
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function AdminProfile() {
 
-const [activee,setActivee]=useState(0)
-const [deactivee,setDeactivee]=useState(0)
-const [bookingStudent,setBookingStudent]=useState([])
-
-const token=localStorage.getItem("token")
 const navigate=useNavigate()
 
 function handleClick(name){
