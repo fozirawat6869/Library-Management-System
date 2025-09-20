@@ -34,7 +34,7 @@ const handleOnclick=(e)=>{
         localStorage.setItem("token",token)
             
          if(usertype==="student"){
-        navigate('/branch')
+        navigate('/studentHomePage')
          }else{
         navigate('/adminProfile')
         }
