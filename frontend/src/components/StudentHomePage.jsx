@@ -47,13 +47,7 @@ function StudentHomePage() {
             <h1 className= 'text-white text-5xl font-bold '>Student Profile</h1>
             <h1 className={`text-2xl px-4 py-2 font-bold text-white rounded-xl ${item.isActive===1?"bg-green-500":"bg-red-500"}`}>{item.isActive===1?"Active":"Deactive"}</h1>
           </div>
-          {/* <div className='flex items-center gap-4 mb-10'>
-  <h1 className='text-white text-5xl font-bold'>Student Profile</h1>
-  <span className={`text-white font-bold px-4 py-2 rounded-full text-xl
-    ${item.isActive === 1 ? 'bg-green-500' : 'bg-red-500'}`}>
-    {item.isActive === 1 ? "Active" : "Deactive"}
-  </span>
-</div> */}
+       
           
           <div className='flex gap-6 justify-around bg-indigo-600 px-6 py-4 items-center rounded-3xl shadow-2xl w-full max-w-6xl mb-15 text-white'>
             <div className='font-bold text-2xl cursor-pointer hover:text-yellow-400 transition duration-300 hover:scale-105'>Home</div>
