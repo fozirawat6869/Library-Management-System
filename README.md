@@ -15,9 +15,9 @@ Key functionalities include:
 
 ## Technologies
 
-- HTML, CSS, JavaScript  
+- HTML, TailwindCSS, JavaScript , react.js
 - Node.js, Express.js  
-- MongoDB  
+- MySql
 
 ---
 
