@@ -1,8 +1,6 @@
 # Library Management System
 
-A web application to manage library books efficiently.  
-Users can **add**, **update**, **delete**, **search**, and **view** books easily.  
-The system allows librarians or staff to maintain an organized library, track available books, and quickly find information about any book.
+A web application that allows users to request books, which are then processed by the admin. Users can view available books and make requests, while the admin manages book issuance and keeps track of the library collection. Built with HTML, CSS, JavaScript, Node.js, Express.js, and MongoDB, it provides a simple and organized interface for library management.
 
 Key functionalities include:  
 - Adding new books with details like title, author, genre, and publication year  
