@@ -13,9 +13,10 @@ Key functionalities include:
 
 ## Technologies
 
-- HTML, TailwindCSS, JavaScript , react.js
+- React.js, TailwindCSS, JavaScript 
 - Node.js, Express.js  
 - MySql
+- RESTful API
 
 ---
 
