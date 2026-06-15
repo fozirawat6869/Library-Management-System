@@ -1,6 +1,6 @@
 # Library Management System
 
-A web application that allows users to request books, which are then processed by the admin. Users can view available books and make requests, while the admin manages book issuance and keeps track of the library collection. Built with HTML, CSS, JavaScript, Node.js, Express.js, and MongoDB, it provides a simple and organized interface for library management.
+A web application that allows users to request books, which are then processed by the admin. Users can view available books and make requests, while the admin manages book issuance and keeps track of the library collection. Built with React.js, Node.js, Express.js, and MySQL, it provides a simple and organized interface for library management.
 
 Key functionalities include:  
 - Adding new books with details like title, author, genre, and publication year  
