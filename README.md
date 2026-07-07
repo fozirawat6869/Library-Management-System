@@ -16,7 +16,6 @@ Key functionalities include:
 - React.js, TailwindCSS, JavaScript 
 - Node.js, Express.js  
 - MySql
-- RESTful API
 
 ---
 
